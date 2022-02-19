@@ -1,6 +1,8 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 
+const char* messageTemplate = "Hi, the temperature is\n";
+
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
     return TOO_LOW;
@@ -13,31 +15,31 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
 
 BreachType classifyTemperatureBreach(
     CoolingType coolingType, double temperatureInC) {
-  int lowerLimit = 0;
-  int upperLimit = 0;
   switch(coolingType) {
     case PASSIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 35;
+      setOperatingLimitsForCoolingType(0,35);
       break;
     case HI_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 45;
+      setOperatingLimitsForCoolingType(0,45);
       break;
     case MED_ACTIVE_COOLING:
-      lowerLimit = 0;
-      upperLimit = 40;
+    default:
+      setOperatingLimitsForCoolingType(0,40);
       break;
   }
   return inferBreach(temperatureInC, lowerLimit, upperLimit);
 }
 
-void checkAndAlert(
-    AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+CoolingLimit setOperatingLimitsForCoolingType(float lowerLimit, float upperLimit){
+    CoolingLimit coolingLimit;
+    coolingLimit.lowerLimit = lowerLimit;
+    coolingLimit.upperLimit = upperLimit;
+    return coolingLimit;
+}
 
-  BreachType breachType = classifyTemperatureBreach(
-    batteryChar.coolingType, temperatureInC
-  );
+void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+
+  BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC);
 
   switch(alertTarget) {
     case TO_CONTROLLER:
@@ -54,18 +56,28 @@ void sendToController(BreachType breachType) {
   printf("%x : %x\n", header, breachType);
 }
 
+void printStatusOnConsole(const char* statement) {
+	printf("%s \n", statement);
+}
+
+void setWarningMessage(const char* status){
+   	  char warnMsg[100];
+      strcpy(warnMsg, messageTemplate);
+  	  strcat(warnMsg,  status);
+      printStatusOnConsole(warnMsg);
+}
+
 void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
   switch(breachType) {
     case TOO_LOW:
-      printf("To: %s\n", recepient);
-      printf("Hi, the temperature is too low\n");
+      setWarningMessage("too low");
       break;
     case TOO_HIGH:
-      printf("To: %s\n", recepient);
-      printf("Hi, the temperature is too high\n");
+      setWarningMessage("too high");
       break;
     case NORMAL:
+      setWarningMessage("normal");
       break;
   }
 }
