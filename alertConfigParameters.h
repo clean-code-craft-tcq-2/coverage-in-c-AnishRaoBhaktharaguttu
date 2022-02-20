@@ -24,4 +24,4 @@ typedef enum {
 } AlertTarget;
 
 extern BatteryCharacter BatteryTemperatureValues[3];
-extern char AlertMessageOverEmail[MAX_BREACH_TYPES][100];
+extern char AlertMessageOverEmail[3][100];
