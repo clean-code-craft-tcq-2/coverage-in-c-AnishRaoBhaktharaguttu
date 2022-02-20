@@ -32,10 +32,9 @@ typedef void (*func_ptrAlertBreach)(BreachType);
 
 typedef struct 
 {
-  AlertOptions alertOption;
   func_ptrAlertBreach alertFunction;
-} AlertTarget;
+} AlertTargetFunction;
 
 extern BatteryCharacter BatteryTemperatureValues[3];
 extern char AlertMessageForMail[3][100];
-extern AlertTarget AlertTargetConfiguration[2];
+extern AlertTargetFunction AlertTargetFuncConfiguration[2];
