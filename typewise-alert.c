@@ -1,8 +1,26 @@
 #include "typewise-alert.h"
 #include <stdio.h>
+#include <string.h>
 
 const char* messageTemplate = "Hi, the temperature is\n";
 
+void printWarningMessageForEmail(const char* recipient, char[] alertStatus){
+    char warnMsg[100];
+    strcpy(warnMsg, messageTemplate);
+    strcat(warnMsg,  alertStatus);
+    printf("To: %s\n%s", recipient, warnMsg);
+}
+
+void sendToEmail(BreachType breachType) {
+  const char* recepient = "a.b@c.com";
+  printWarningMessageForEmail(recepient, AlertMessageForMail[breachType]
+}
+
+void sendToController(BreachType breachType) {
+  const unsigned short header = 0xfeed;
+  printf("%x : %x\n", header, breachType);
+}
+                    
 //Function to infer the nature of breach occured
 BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue) 
 {
@@ -24,13 +42,6 @@ BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
   return batteryCharacteristics;
 }
 
-void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
-  BatteryCharacter batteryCharacteristics;
-  batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
-  BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
-  alertBreach(alertTarget, breachType);
-}
-
 void alertBreach(AlertTarget alertTarget, BreachType breachType){
 switch(alertTarget) {
     case TO_CONTROLLER:
@@ -41,20 +52,10 @@ switch(alertTarget) {
       break;
   }
 }
-
-void sendToController(BreachType breachType) {
-  const unsigned short header = 0xfeed;
-  printf("%x : %x\n", header, breachType);
-}
-
-void printWarningMessageForEmail(const char* recipient, char[] alertStatus){
-    char warnMsg[100];
-    strcpy(warnMsg, messageTemplate);
-    strcat(warnMsg,  status);
-    printf("To: %s\n%s", recipient, warnMsg);
-}
-
-void sendToEmail(BreachType breachType) {
-  const char* recepient = "a.b@c.com";
-  setWarningMessage(AlertMessageForMail[BreachTypeInfo]
+                    
+void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
+  BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
+  alertBreach(alertTarget, breachType);
 }
