@@ -13,7 +13,7 @@ void printWarningMessageForEmail(const char* recipient, char[] alertStatus){
 
 void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  printWarningMessageForEmail(recepient, AlertMessageForMail[breachType]
+  printWarningMessageForEmail(recepient, AlertMessageForMail[breachType]);
 }
 
 void sendToController(BreachType breachType) {
