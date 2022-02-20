@@ -12,13 +12,24 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
-typedef struct {
-  float lowerLimit;
-  float upperLimit;
-}CoolingLimit;
+BatteryCharacter BatteryTemperatureValues[3] =
+{
+  {
+  lowerLimit = 0,
+  upperLimit = 35,
+  },
+  {
+  lowerLimit = 0,
+  upperLimit = 45,
+  },
+  {
+  .lowerLimit = 0,
+  .upperLimit = 40,
+  }
+};
 
-BreachType inferBreach(double value, double lowerLimit, double upperLimit);
-BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
+BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue);
+BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
 
 typedef enum {
   TO_CONTROLLER,
@@ -27,8 +38,13 @@ typedef enum {
 
 typedef struct {
   CoolingType coolingType;
+  float lowerLimitOfTemperature;
+  float upperLimitOfTemperature;
   char brand[48];
 } BatteryCharacter;
+
+char AlertMessageForMail[3][20] =
+{" normal\n"," too low\n"," too high\n"};
 
 void checkAndAlert(
   AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
