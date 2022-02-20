@@ -75,16 +75,100 @@ TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper tem
 }
 
 TEST_CASE("AlertBreach - Alert message to controller with breach level NORMAL ") {
-  alertBreach(TO_CONTROLLER, NORMAL);  
+  bool alertStatus = alertBreach(TO_CONTROLLER, NORMAL);
+  REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("AlertBreach - Alert message to controller with breach level TOO_LOW ") {
+  bool alertStatus = alertBreach(TO_CONTROLLER, TOO_LOW);
+  REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("AlertBreach - Alert message to controller with breach level TOO_HIGH ") {
+  bool alertStatus = alertBreach(TO_CONTROLLER, TOO_HIGH);
+  REQUIRE(alertStatus  == true);
 }
 
 TEST_CASE("AlertBreach - Alert message to email with breach level NORMAL ") {
-  alertBreach(TO_EMAIL, NORMAL);
+   bool alertStatus = alertBreach(TO_EMAIL, NORMAL);
+    REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("AlertBreach - Alert message to email with breach level TOO_LOW ") {
+  bool alertStatus = alertBreach(TO_EMAIL, TOO_LOW);
+  REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("AlertBreach - Alert message to email with breach level TOO_HIGH ") {
+  bool alertStatus = alertBreach(TO_EMAIL, TOO_HIGH);
+  REQUIRE(alertStatus  == true);
 }
 
 TEST_CASE("CheckAndAlert - TO_CONTROLLER , PASSIVE_COOLING with all range of temp values ") {
-  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,20);
-  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,38);
-  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-5);
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,20);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,38);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-5);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - TO_CONTROLLER , HI_ACTIVE_COOLING  with all range of temp values ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,30);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,49);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-2);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - TO_CONTROLLER , MED_ACTIVE_COOLING with all range of temp values ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING, 32);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,43);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-3);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - TO_EMAIL , PASSIVE_COOLING with all range of temp values ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_EMAIL,PASSIVE_COOLING,20);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,38);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,-5);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - TO_EMAIL , HI_ACTIVE_COOLING  with all range of temp values ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_EMAIL,PASSIVE_COOLING,30);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,49);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,-2);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - TO_EMAIL , MED_ACTIVE_COOLING with all range of temp values ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_EMAIL,PASSIVE_COOLING, 32);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,43);
+   REQUIRE(alertStatus  == true);
+   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,-3);
+   REQUIRE(alertStatus  == true);
+}
+
+TEST_CASE("CheckAndAlert - Check negative scenario ") {
+   bool alertStatus;
+   alertStatus= checkAndAlert(TO_EMAIL,INVALID_VALUE, 32);
+   REQUIRE(alertStatus  == false);
+   alertStatus = checkAndAlert(TO_CONTROLLER,INVALID_VALUE,43);
+   REQUIRE(alertStatus  == false);
 }
 
