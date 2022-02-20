@@ -4,6 +4,27 @@
 #include "alertConfigParameters.h"
 #include "typewise-alert.h"
 
+TEST_CASE("ValidateEnumValue - Passing enum value satisfying the range - Positive use case ") {
+  bool validateStatus = validateEnumValue (2,3);
+  REQUIRE(validateStatus  == true);
+}
+
+TEST_CASE("ValidateEnumValue - Passing enum value greater than the maximum accepted value - Negative use case ") {
+  bool validateStatus = validateEnumValue (4,3);
+  REQUIRE(validateStatus  == false);
+}
+
+
+TEST_CASE("ValidateEnumValue - Passing enum value lesser than zero - Negative use case ") {
+  bool validateStatus = validateEnumValue (-4,3);
+  REQUIRE(validateStatus  == false);
+}
+
+TEST_CASE("ValidateEnumValue - Passing enum value lesser than zero but greater than maximum accepted value - Negative use case  ") {
+  bool validateStatus = validateEnumValue (-5,-7);
+  REQUIRE(validateStatus  == false);
+}
+
 TEST_CASE("InferBreach -Temperature value is less than operating lower limit") {
   BatteryCharacter batteryCharacteristics;
   batteryCharacteristics.lowerLimitOfTemp  = 25;
