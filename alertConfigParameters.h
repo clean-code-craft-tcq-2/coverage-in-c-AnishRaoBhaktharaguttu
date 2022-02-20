@@ -25,7 +25,8 @@ typedef struct {
 
 typedef enum {
   TO_CONTROLLER,
-  TO_EMAIL
+  TO_EMAIL, 
+  INVALID_VALUE
 } AlertOptions;
 
 //define a function pointer which consumes breachType and alerts via mail / controller
