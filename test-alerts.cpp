@@ -8,5 +8,5 @@ TEST_CASE("InferBreach -Temperature value is less than operating lower limit") {
   batteryCharacteristics.lowerLimitOfTemp  = 20;
   batteryCharacteristics.upperLimitOfTemp  = 50;
   float tempValue = 10;
-  REQUIRE(InferBreach(batteryCharacteristics, tempValue) == TOO_LOW);
+  REQUIRE(inferBreach(batteryCharacteristics, tempValue) == TOO_LOW);
 }
