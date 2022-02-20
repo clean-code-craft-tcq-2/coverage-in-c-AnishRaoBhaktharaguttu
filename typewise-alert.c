@@ -6,10 +6,10 @@ const char* messageTemplate = "Hi, the temperature is\n";
 //Function to infer the nature of breach occured
 BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue) 
 {
-  if(tempValue < batteryCharacteristics.lowerLimitOfTemperature)
+  if(tempValue < batteryCharacteristics.lowerLimitOfTemp)
   {return TOO_LOW;
   }
-  else if(tempValue > batteryCharacteristics.upperLimitOfTemperature)
+  else if(tempValue > batteryCharacteristics.upperLimitOfTemp)
   { return TOO_HIGH;
   }
   return NORMAL;
@@ -18,21 +18,20 @@ BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue)
 BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
 {
   BatteryCharacter batteryCharacteristics; 
-  batteryParameters.coolingType = coolingType;
-  batteryParameters.lowerLimitTemp = BatteryTemperatureValues[coolingType].lowerLimit;
-  batteryParameters.higherLimitTemp = BatteryTemperatureValues[coolingType].upperLimit;
+  batteryCharacteristics.coolingType = coolingType;
+  batteryCharacteristics.lowerLimitOfTemp = BatteryTemperatureValues[coolingType].lowerLimitOfTemp;
+  batteryCharacteristics.upperLimitOfTemp = BatteryTemperatureValues[coolingType].upperLimitOfTemp;
   return batteryCharacteristics;
 }
 
-void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, double tempValue) {
+void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
   BatteryCharacter batteryCharacteristics;
-  batteryCharacteristics = populateOperatingTemperatureValues(batteryChar);
+  batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
   BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
-
-  
+  alertBreach(alertTarget, breachType);
 }
 
-bool alertBreach(AlertTarget alertTarget, BreachType breachType){
+void alertBreach(AlertTarget alertTarget, BreachType breachType){
 switch(alertTarget) {
     case TO_CONTROLLER:
       sendToController(breachType);
