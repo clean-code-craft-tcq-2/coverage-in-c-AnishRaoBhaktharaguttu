@@ -2,7 +2,7 @@
 #include "alertConfigParameters.h"
 #include "typewise-alert.h"
 
-BatteryCharacter BatteryTemperatureValues[3] =
+BatteryCharacter BatteryTemperatureValues[ACCEPTABLE_COOLING_STATES] =
 {
   {
   .lowerLimitOfTemp = 0,
@@ -18,5 +18,19 @@ BatteryCharacter BatteryTemperatureValues[3] =
   }
 };
 
-char AlertMessageForMail[3][100] =
-{"Hi, the temperature is normal\n","Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
+AlertTarget AlertTargetConfiguration[ACCEPTABLE_ALERT_VALUE] =
+{
+  {
+    .alertOption = TO_CONTROLLER,
+    .alertFunction = &SendAlertToController
+  },
+  {
+     .alertOption = TO_EMAIL,
+    .alertFunction = &sendToController
+  }
+};
+
+char AlertMessageForMail[ACCEPTABLE_COOLING_STATES][100] =
+{"Hi, the temperature is normal\n",
+ "Hi, the temperature is too low\n",
+ "Hi, the temperature is too high\n"};
