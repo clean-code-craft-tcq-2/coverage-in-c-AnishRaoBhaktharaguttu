@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "alertConfigParameters.h"
 #include "typewise-alert.h"
 
