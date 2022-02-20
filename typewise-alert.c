@@ -51,7 +51,7 @@ BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
 
 bool alertBreach(AlertOptions alertOption, BreachType breachType){
   if(validateEnumValue(alertOption, ACCEPTABLE_ALERT_VALUE)){
-      AlertTargetConfiguration[alertOption].alertFunction(breachType);
+      AlertTargetFuncConfiguration[alertOption].alertFunction(breachType);
       return true;
   }
     return false;
