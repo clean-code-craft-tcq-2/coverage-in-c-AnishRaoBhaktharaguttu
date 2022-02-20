@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void printWarningMessageForEmail(const char* recipient, char[] alertStatus){
+void printWarningMessageForEmail(const char* recipient, char alertStatus[]){
     printf("To: %s\n%s", recipient, alertStatus);
 }
 
