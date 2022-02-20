@@ -18,14 +18,12 @@ BatteryCharacter BatteryTemperatureValues[ACCEPTABLE_COOLING_STATES] =
   }
 };
 
-AlertTarget AlertTargetConfiguration[ACCEPTABLE_ALERT_VALUE] =
+AlertTargetFunction AlertTargetFuncConfiguration[ACCEPTABLE_ALERT_VALUE] =
 {
   {
-    .alertOption = TO_CONTROLLER,
-    .alertFunction = &SendAlertToController
+    .alertFunction = &sendToEmail
   },
   {
-     .alertOption = TO_EMAIL,
     .alertFunction = &sendToController
   }
 };
