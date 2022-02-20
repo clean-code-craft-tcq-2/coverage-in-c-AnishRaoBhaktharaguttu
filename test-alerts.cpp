@@ -6,8 +6,49 @@
 
 TEST_CASE("InferBreach -Temperature value is less than operating lower limit") {
   BatteryCharacter batteryCharacteristics;
-  batteryCharacteristics.lowerLimitOfTemp  = 20;
-  batteryCharacteristics.upperLimitOfTemp  = 50;
+  batteryCharacteristics.lowerLimitOfTemp  = 25;
+  batteryCharacteristics.upperLimitOfTemp  = 60;
   float tempValue = 10;
   REQUIRE(inferBreach(batteryCharacteristics, tempValue) == TOO_LOW);
+}
+
+TEST_CASE("InferBreach - Temperature value is more than operating higher limit") {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics.lowerLimitOfTemp  = 25;
+  batteryCharacteristics.upperLimitOfTemp  = 60;
+  float tempValue = 65;
+  REQUIRE(inferBreach(batteryCharacteristics, tempValue) == TOO_HIGH);
+}
+
+
+TEST_CASE("InferBreach - Temperature value is in the normal operating range") {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics.lowerLimitOfTemp  = 25;
+  batteryCharacteristics.upperLimitOfTemp  = 60;
+  float tempValue = 43;
+  REQUIRE(inferBreach(batteryCharacteristics, tempValue) == NORMAL);
+}
+
+TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper temperature limits based on cooling type - PASSIVE_COOLING ") {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics = populateOperatingTemperatureValues(PASSIVE_COOLING);
+  REQUIRE(batteryCharacteristics.coolingType  == PASSIVE_COOLING);
+  REQUIRE(batteryCharacteristics.lowerLimitOfTemp  == 0);
+  REQUIRE(batteryCharacteristics.upperLimitOfTemp  == 35);
+}
+
+TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper temperature limits based on cooling type - HI_ACTIVE_COOLING ") {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics = populateOperatingTemperatureValues(HI_ACTIVE_COOLING);
+  REQUIRE(batteryCharacteristics.coolingType  == HI_ACTIVE_COOLING);
+  REQUIRE(batteryCharacteristics.lowerLimitOfTemp  == 0);
+  REQUIRE(batteryCharacteristics.upperLimitOfTemp  == 45);
+}
+
+TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper temperature limits based on cooling type - MED_ACTIVE_COOLING ") {
+  BatteryCharacter batteryCharacteristics;
+  batteryCharacteristics = populateOperatingTemperatureValues(MED_ACTIVE_COOLING);
+  REQUIRE(batteryCharacteristics.coolingType  == MED_ACTIVE_COOLING);
+  REQUIRE(batteryCharacteristics.lowerLimitOfTemp  == 0);
+  REQUIRE(batteryCharacteristics.upperLimitOfTemp  == 40);
 }
