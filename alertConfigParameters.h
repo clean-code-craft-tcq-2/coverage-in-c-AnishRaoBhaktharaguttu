@@ -38,4 +38,4 @@ typedef struct
 
 extern BatteryCharacter BatteryTemperatureValues[3];
 extern char AlertMessageForMail[3][100];
-extern 
+extern AlertTarget AlertTargetConfiguration[2];
