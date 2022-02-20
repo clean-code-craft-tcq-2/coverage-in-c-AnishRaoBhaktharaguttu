@@ -14,8 +14,8 @@ typedef enum {
 
 typedef struct {
   CoolingType coolingType;
-  float lowerLimitOfTemperature;
-  float upperLimitOfTemperature;
+  float lowerLimitOfTemp;
+  float upperLimitOfTemp;
   char brand[48];
 } BatteryCharacter;
 
