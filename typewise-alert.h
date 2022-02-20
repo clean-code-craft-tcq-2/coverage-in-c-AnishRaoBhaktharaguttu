@@ -12,6 +12,13 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
+typedef struct {
+  CoolingType coolingType;
+  float lowerLimitOfTemperature;
+  float upperLimitOfTemperature;
+  char brand[48];
+} BatteryCharacter;
+
 BatteryCharacter BatteryTemperatureValues[3] =
 {
   {
@@ -35,13 +42,6 @@ typedef enum {
   TO_CONTROLLER,
   TO_EMAIL
 } AlertTarget;
-
-typedef struct {
-  CoolingType coolingType;
-  float lowerLimitOfTemperature;
-  float upperLimitOfTemperature;
-  char brand[48];
-} BatteryCharacter;
 
 char AlertMessageForMail[3][20] =
 {" normal\n"," too low\n"," too high\n"};
