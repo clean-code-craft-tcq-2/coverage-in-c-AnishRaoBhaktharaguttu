@@ -35,9 +35,6 @@ BatteryCharacter BatteryTemperatureValues[3] =
   }
 };
 
-BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue);
-BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType);
-
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL
@@ -46,8 +43,8 @@ typedef enum {
 char AlertMessageForMail[3][20] =
 {" normal\n"," too low\n"," too high\n"};
 
-void checkAndAlert(
-  AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
-
+BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue);
+BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType);
+void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue);
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
