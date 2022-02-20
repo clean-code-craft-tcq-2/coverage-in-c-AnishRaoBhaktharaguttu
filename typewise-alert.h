@@ -29,7 +29,7 @@ BatteryCharacter BatteryTemperatureValues[3] =
 };
 
 BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue);
-BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
+BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType);
 
 typedef enum {
   TO_CONTROLLER,
