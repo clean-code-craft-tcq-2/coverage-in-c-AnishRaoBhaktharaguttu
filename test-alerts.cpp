@@ -52,3 +52,13 @@ TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper tem
   REQUIRE(batteryCharacteristics.lowerLimitOfTemp  == 0);
   REQUIRE(batteryCharacteristics.upperLimitOfTemp  == 40);
 }
+
+TEST_CASE("AlertBreach - Alert message to controller with breach level NORMAL ") {
+  alertBreach(TO_CONTROLLER,NORMAL);  
+}
+
+TEST_CASE("AlertBreach - Alert message to email with breach level NORMAL ") {
+  alertBreach(TO_EMAIL,NORMAL);
+}
+
+
