@@ -7,7 +7,7 @@ typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
   MED_ACTIVE_COOLING,
-  INVALID_VALUE
+  INVALID_COOLING_VALUE
 } CoolingType;
 
 typedef enum {
@@ -26,7 +26,7 @@ typedef struct {
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL, 
-  INVALID_VALUE
+  INVALID_ALERT_VALUE
 } AlertOptions;
 
 //define a function pointer which consumes breachType and alerts via mail / controller
