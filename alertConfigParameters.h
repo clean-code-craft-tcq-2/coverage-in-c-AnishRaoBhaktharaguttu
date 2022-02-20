@@ -25,7 +25,17 @@ typedef struct {
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL
+} AlertOptions;
+
+//define a function pointer which consumes breachType and alerts via mail / controller
+typedef void (*func_ptrAlertBreach)(BreachType);
+
+typedef struct 
+{
+  AlertOptions alertOption;
+  func_ptrAlertBreach alertFunction;
 } AlertTarget;
 
 extern BatteryCharacter BatteryTemperatureValues[3];
 extern char AlertMessageForMail[3][100];
+extern 
