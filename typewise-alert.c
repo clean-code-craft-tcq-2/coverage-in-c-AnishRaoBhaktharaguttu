@@ -58,7 +58,7 @@ bool alertBreach(AlertOptions alertOption, BreachType breachType){
 }
                     
 bool checkAndAlert(AlertOptions alertOption, CoolingType coolingType, float tempValue) {
-  if(validateEnumValue(coolingType, ACCEPTABLE_COOLING_STATES){
+  if(validateEnumValue(coolingType, ACCEPTABLE_COOLING_STATES)){
       BatteryCharacter batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
       BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
       return alertBreach(alertOption, breachType);
