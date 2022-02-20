@@ -121,21 +121,21 @@ TEST_CASE("CheckAndAlert - TO_CONTROLLER , PASSIVE_COOLING with all range of tem
 
 TEST_CASE("CheckAndAlert - TO_CONTROLLER , HI_ACTIVE_COOLING  with all range of temp values ") {
    bool alertStatus;
-   alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,30);
+   alertStatus= checkAndAlert(TO_CONTROLLER,HI_ACTIVE_COOLING,30);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,49);
+   alertStatus = checkAndAlert(TO_CONTROLLER,HI_ACTIVE_COOLING,49);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-2);
+   alertStatus = checkAndAlert(TO_CONTROLLER,HI_ACTIVE_COOLING,-2);
    REQUIRE(alertStatus  == true);
 }
 
 TEST_CASE("CheckAndAlert - TO_CONTROLLER , MED_ACTIVE_COOLING with all range of temp values ") {
    bool alertStatus;
-   alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING, 32);
+   alertStatus= checkAndAlert(TO_CONTROLLER,MED_ACTIVE_COOLING, 32);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,43);
+   alertStatus = checkAndAlert(TO_CONTROLLER,MED_ACTIVE_COOLING,43);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-3);
+   alertStatus = checkAndAlert(TO_CONTROLLER,MED_ACTIVE_COOLING,-3);
    REQUIRE(alertStatus  == true);
 }
 
@@ -151,21 +151,21 @@ TEST_CASE("CheckAndAlert - TO_EMAIL , PASSIVE_COOLING with all range of temp val
 
 TEST_CASE("CheckAndAlert - TO_EMAIL , HI_ACTIVE_COOLING  with all range of temp values ") {
    bool alertStatus;
-   alertStatus= checkAndAlert(TO_EMAIL,PASSIVE_COOLING,30);
+   alertStatus= checkAndAlert(TO_EMAIL,HI_ACTIVE_COOLING,30);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,49);
+   alertStatus = checkAndAlert(TO_EMAIL,HI_ACTIVE_COOLING,49);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,-2);
+   alertStatus = checkAndAlert(TO_EMAIL,HI_ACTIVE_COOLING,-2);
    REQUIRE(alertStatus  == true);
 }
 
 TEST_CASE("CheckAndAlert - TO_EMAIL , MED_ACTIVE_COOLING with all range of temp values ") {
    bool alertStatus;
-   alertStatus= checkAndAlert(TO_EMAIL,PASSIVE_COOLING, 32);
+   alertStatus= checkAndAlert(TO_EMAIL,MED_ACTIVE_COOLING, 32);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,43);
+   alertStatus = checkAndAlert(TO_EMAIL,MED_ACTIVE_COOLING,43);
    REQUIRE(alertStatus  == true);
-   alertStatus = checkAndAlert(TO_EMAIL,PASSIVE_COOLING,-3);
+   alertStatus = checkAndAlert(TO_EMAIL,MED_ACTIVE_COOLING,-3);
    REQUIRE(alertStatus  == true);
 }
 
@@ -177,5 +177,7 @@ TEST_CASE("CheckAndAlert - Check negative scenario ") {
    REQUIRE(alertStatus  == false);
    alertStatus = checkAndAlert(INVALID_ALERT_VALUE,PASSIVE_COOLING,43);
    REQUIRE(alertStatus  == false);
+   alertStatus = checkAndAlert(TO_CONTROLLER,HI_ACTIVE_COOLING,30);
+   REQUIRE(alertStatus  == true);
 }
 
