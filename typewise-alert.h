@@ -19,22 +19,6 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
-BatteryCharacter BatteryTemperatureValues[3] =
-{
-  {
-  .lowerLimitOfTemp = 0,
-  .upperLimitOfTemp = 35,
-  },
-  {
-  .lowerLimitOfTemp = 0,
-  .upperLimitOfTemp = 45,
-  },
-  {
-  .lowerLimitOfTemp = 0,
-  .upperLimitOfTemp = 40,
-  }
-};
-
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL
