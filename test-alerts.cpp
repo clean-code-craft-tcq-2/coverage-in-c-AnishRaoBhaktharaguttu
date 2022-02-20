@@ -104,6 +104,11 @@ TEST_CASE("AlertBreach - Alert message to email with breach level TOO_HIGH ") {
   REQUIRE(alertStatus  == true);
 }
 
+TEST_CASE("AlertBreach - Negative use case - Alert with invalid configuration ") {
+  bool alertStatus = alertBreach(INVALID_VALUE, TOO_HIGH);
+  REQUIRE(alertStatus  == false);
+}
+
 TEST_CASE("CheckAndAlert - TO_CONTROLLER , PASSIVE_COOLING with all range of temp values ") {
    bool alertStatus;
    alertStatus= checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,20);
@@ -169,6 +174,8 @@ TEST_CASE("CheckAndAlert - Check negative scenario ") {
    alertStatus= checkAndAlert(TO_EMAIL,INVALID_VALUE, 32);
    REQUIRE(alertStatus  == false);
    alertStatus = checkAndAlert(TO_CONTROLLER,INVALID_VALUE,43);
+   REQUIRE(alertStatus  == false);
+   alertStatus = checkAndAlert(INVALID_VALUE,PASSIVE_COOLING,43);
    REQUIRE(alertStatus  == false);
 }
 
