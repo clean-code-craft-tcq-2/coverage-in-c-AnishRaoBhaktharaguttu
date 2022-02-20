@@ -22,12 +22,12 @@ typedef struct {
 BatteryCharacter BatteryTemperatureValues[3] =
 {
   {
-  lowerLimitOfTemp = 0,
-  upperLimitOfTemp = 35,
+  .lowerLimitOfTemp = 0,
+  .upperLimitOfTemp = 35,
   },
   {
-  lowerLimitOfTemp = 0,
-  upperLimitOfTemp = 45,
+  .lowerLimitOfTemp = 0,
+  .upperLimitOfTemp = 45,
   },
   {
   .lowerLimitOfTemp = 0,
