@@ -5,5 +5,5 @@ BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType);
 bool checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue);
 void sendToController(BreachType breachType);
 void sendToEmail(BreachType breachType);
-void alertBreach(AlertTarget alertTarget, BreachType breachType);
+bool alertBreach(AlertTarget alertTarget, BreachType breachType);
 bool validateEnumValue(int enumValue, int maxPossibleValue);
