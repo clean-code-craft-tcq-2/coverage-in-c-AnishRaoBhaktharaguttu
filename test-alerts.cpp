@@ -54,11 +54,20 @@ TEST_CASE("populateOperatingTemperatureValues - Populate the lower and upper tem
 }
 
 TEST_CASE("AlertBreach - Alert message to controller with breach level NORMAL ") {
-  alertBreach(TO_CONTROLLER,NORMAL);  
+  alertBreach(TO_CONTROLLER, NORMAL);  
 }
 
 TEST_CASE("AlertBreach - Alert message to email with breach level NORMAL ") {
-  alertBreach(TO_EMAIL,NORMAL);
+  alertBreach(TO_EMAIL, NORMAL);
 }
 
+TEST_CASE("AlertBreach - Testing invalid value ") {
+  alertBreach(TO_CHANNEL, NORMAL);
+}
+
+TEST_CASE("CheckAndAlert - TO_CONTROLLER , PASSIVE_COOLING with all range of temp values ") {
+  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,20);
+  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,38);
+  checkAndAlert(TO_CONTROLLER,PASSIVE_COOLING,-5);
+}
 
