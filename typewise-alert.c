@@ -2,13 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-const char* messageTemplate = "Hi, the temperature is\n";
-
 void printWarningMessageForEmail(const char* recipient, char[] alertStatus){
-    char warnMsg[100];
-    strcpy(warnMsg, messageTemplate);
-    strcat(warnMsg,  alertStatus);
-    printf("To: %s\n%s", recipient, warnMsg);
+    printf("To: %s\n%s", recipient, alertStatus);
 }
 
 void sendToEmail(BreachType breachType) {
@@ -54,8 +49,7 @@ switch(alertTarget) {
 }
                     
 void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
-  BatteryCharacter batteryCharacteristics;
-  batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
+  BatteryCharacter batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
   BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
   alertBreach(alertTarget, breachType);
 }
