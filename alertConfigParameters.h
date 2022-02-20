@@ -1,5 +1,7 @@
 #include <stddef.h>
 
+#define ACCEPTABLE_ALERT_VALUE 2
+
 typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
