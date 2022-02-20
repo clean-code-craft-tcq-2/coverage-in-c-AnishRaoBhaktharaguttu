@@ -49,19 +49,19 @@ BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
   return batteryCharacteristics;
 }
 
-bool alertBreach(AlertTarget alertTarget, BreachType breachType){
-  if(validateEnumValue(alertTarget, ACCEPTABLE_ALERT_VALUE)){
-      AlertTargetConfiguration[alertTarget].alertFunction(breachType);
+bool alertBreach(AlertOptions alertOption, BreachType breachType){
+  if(validateEnumValue(alertOption, ACCEPTABLE_ALERT_VALUE)){
+      AlertTargetConfiguration[alertOption].alertFunction(breachType);
       return true;
   }
     return false;
 }
                     
-bool checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
+bool checkAndAlert(AlertOptions alertOption, CoolingType coolingType, float tempValue) {
   if(validateEnumValue(coolingType, ACCEPTABLE_COOLING_STATES){
       BatteryCharacter batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
       BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
-      return alertBreach(alertTarget, breachType);
+      return alertBreach(alertOption, breachType);
   }
     return false;
 }
