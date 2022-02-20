@@ -40,8 +40,8 @@ typedef enum {
   TO_EMAIL
 } AlertTarget;
 
-char AlertMessageForMail[3][20] =
-{" normal\n"," too low\n"," too high\n"};
+char AlertMessageForMail[3][100] =
+{"Hi, the temperature is normal\n","Hi, the temperature is too low\n","Hi, the temperature is too high\n"};
 
 BreachType inferBreach(BatteryCharacter batteryCharacteristics, float tempValue);
 BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType);
