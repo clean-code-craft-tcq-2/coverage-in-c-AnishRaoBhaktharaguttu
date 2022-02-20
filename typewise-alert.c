@@ -2,6 +2,17 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+
+// The method validates if the provided enum value is within acceptable values
+bool validateEnumValue(int enumValue, int maxPossibleValue)
+{
+  if((enumValue >= 0) && (enumValue < maxPossibleValue))
+  { 
+      return true;
+  } 
+  return false;
+}
 
 void printWarningMessageForEmail(const char* recipient, char alertStatus[]){
     printf("To: %s\n%s", recipient, alertStatus);
@@ -38,19 +49,26 @@ BatteryCharacter populateOperatingTemperatureValues(CoolingType coolingType)
   return batteryCharacteristics;
 }
 
-void alertBreach(AlertTarget alertTarget, BreachType breachType){
-switch(alertTarget) {
-    case TO_CONTROLLER:
-      sendToController(breachType);
-      break;
-    case TO_EMAIL:
-      sendToEmail(breachType);
-      break;
+bool alertBreach(AlertTarget alertTarget, BreachType breachType){
+if(validateEnumValue(alertTarget, ACCEPTABLE_ALERT_VALUE)){
+    switch(alertTarget) {
+        case TO_CONTROLLER:
+            sendToController(breachType);
+            break;
+        case TO_EMAIL:
+            sendToEmail(breachType);
+            break;
+    }
+    return true;
   }
+    return false;
 }
                     
-void checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
-  BatteryCharacter batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
-  BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
-  alertBreach(alertTarget, breachType);
+bool checkAndAlert(AlertTarget alertTarget, CoolingType coolingType, float tempValue) {
+  if(validateEnumValue(coolingType, ACCEPTABLE_COOLING_STATES)){
+      BatteryCharacter batteryCharacteristics = populateOperatingTemperatureValues(coolingType);
+      BreachType breachType = inferBreach(batteryCharacteristics, tempValue);
+      return alertBreach(alertTarget, breachType);
+  }
+    return false;
 }
