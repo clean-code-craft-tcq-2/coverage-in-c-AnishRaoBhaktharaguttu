@@ -1,4 +1,4 @@
-#include "alertConfigurationParameters.h"
+#include "alertConfigParameters.h"
 #include "typewise-alert.h"
 
 BatteryCharacter BatteryTemperatureValues[3] =
